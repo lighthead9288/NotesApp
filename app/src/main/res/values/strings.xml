@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NotesApp</string>
+    <string name="editMode">Edit mode</string>
+    <string name="addMode">Add mode</string>
+    <string name="save">Save</string>
+    <string name="note_name_error">Note\'s name should contain at least 1 symbol</string>
+    <string name="note_description_error">Note\'s description should contain at least 1 symbol</string>
+    <string name="delete">Delete</string>
+    <string name="was_deleted">was deleted</string>
+    <string name="note">\"Note \"</string>
+    <string name="was_saved">was saved</string>
+</resources>

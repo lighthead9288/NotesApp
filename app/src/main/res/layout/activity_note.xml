@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.example.notesapp.viewmodels.NoteViewModel" />
+
+        <variable
+            name="note"
+            type="com.example.notesapp.db.entity.Note" />
+
+        <variable
+            name="isEditMode"
+            type="Boolean" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".views.NoteActivity">
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="@{isEditMode ? @string/editMode: @string/addMode}"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.appbar.AppBarLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/noteNameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:ems="10"
+                    android:hint="Enter name"
+                    android:inputType="textPersonName"
+                    android:text="@={note.name}" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/noteDescriptionEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_margin="8dp"
+                    android:ems="10"
+                    android:hint="Enter description"
+                    android:inputType="textMultiLine"
+                    android:paddingBottom="310dp"
+                    android:text="@={note.description}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:onClick="@{()->viewModel.onSave(note, isEditMode)}"
+                    android:text="@string/save"
+                    android:background="@drawable/save_button_shape"
+                    android:textColor="@color/colorWhite" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/delete_button_shape"
+                    android:onClick="@{()->viewModel.onDelete(note)}"
+                    android:text="@string/delete"
+                    android:textColor="@color/colorWhite"
+                    android:visibility="@{isEditMode?View.VISIBLE:View.GONE}" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
